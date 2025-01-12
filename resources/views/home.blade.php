@@ -19,7 +19,12 @@
         </ol>
     </section>
     <section>
-        <!-- The actual chat -->
+        @foreach ($messages as $message)
+            <div>
+                <!-- TODO: HERE we see all messages just sent (By user 1), but we need to see all messages between the two, probably some changes to the model and controller will need to be made -->
+                <p>{{ $message->text }}</p>
+            </div>
+        @endforeach
     </section>
 </body>
 </html>
