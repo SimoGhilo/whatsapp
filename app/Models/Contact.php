@@ -21,4 +21,4 @@ class Contact extends Model
     }
 }
 
-/** Created contact model and migration, user table also modified, TODO: Contact Controller and frontend  */
+

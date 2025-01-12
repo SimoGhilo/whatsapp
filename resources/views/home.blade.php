@@ -8,7 +8,15 @@
 <body>
     <section>
         <h2>Chats</h2>
-        <!-- List of people -->
+        <ol>
+            @foreach ($contacts as $contact)
+                <li>
+                    {{ $contact->contact->name }}
+                    <br/>
+                    {{ $contact->contact->mobile}}
+                </li>
+            @endforeach
+        </ol>
     </section>
     <section>
         <!-- The actual chat -->
