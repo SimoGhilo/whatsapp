@@ -17,9 +17,6 @@ class DashboardController extends Controller
 
         // Call the index method of contactController
         $contacts = app(contactController::class)->index();
-
-        // Call the index method of messageController
-        $messages = app(messageController::class)->index();
     
         // Fetch messages with the chosen contact
         $messages = $chosenContactId

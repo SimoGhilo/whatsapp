@@ -12,21 +12,19 @@
             <div class="title">
                 <h2>Chats</h2>
             </div>
-            <form method="GET" action="{{ route('dashboard') }}">
-                <label for="contact">Choose a contact:</label>
-                <select name="chosen_contact_id" id="contact" onchange="this.form.submit()">
-                    <option value="">-- Select a contact --</option>
-                    @foreach (auth()->user()->contacts as $contact)
-                        <option value="{{ $contact->contact_id }}" {{ request('chosen_contact_id') == $contact->contact_id ? 'selected' : '' }}>
-                            {{ $contact->contact->name }}
-                        </option>
-                    @endforeach
-                </select>
-            </form>
+            @foreach (auth()->user()->contacts as $contact)
+                <form method="GET" action="{{ route('dashboard') }}" style="display: inline;">
+                    <input id="hiddenInput" type="hidden" name="chosen_contact_id" value="{{ $contact->contact_id }}">
+                    <button type="submit" class="btn">
+                        {{ $contact->contact->name }}
+                    </button>
+                </form>
+            @endforeach        
         </section>
         <section class="chatbox">
             <div class="title">
-                <h1>Put selected contact here</h1>
+                <!-- TODO: below display chosen contact_id -->
+                <h1>{{auth()->user()->chosenContact()}}</h1>
             </div>
             @if($chosenContactId)
                 @foreach ($messages as $message)
@@ -108,6 +106,6 @@
         color: aqua;
     }
 
-    /**TODO: do authentication before sorting out the styles*/
 
 </style>
+
