@@ -12,31 +12,35 @@
             <div class="title">
                 <h2>Chats</h2>
             </div>
-            <ol>
-                @foreach ($contacts as $contact)
-                    <li>
-                        {{ $contact->contact->name }}
-                        <br/>
-                        {{ $contact->contact->mobile}}
-                    </li>
-                @endforeach
-            </ol>
+            <form method="GET" action="{{ route('dashboard') }}">
+                <label for="contact">Choose a contact:</label>
+                <select name="chosen_contact_id" id="contact" onchange="this.form.submit()">
+                    <option value="">-- Select a contact --</option>
+                    @foreach (auth()->user()->contacts as $contact)
+                        <option value="{{ $contact->contact_id }}" {{ request('chosen_contact_id') == $contact->contact_id ? 'selected' : '' }}>
+                            {{ $contact->contact->name }}
+                        </option>
+                    @endforeach
+                </select>
+            </form>
         </section>
         <section class="chatbox">
             <div class="title">
                 <h1>Put selected contact here</h1>
-                <!-- TODO: I think Auth->id()->name -->
             </div>
-            @foreach ($messages as $message)
-                <div class="message-wrapper">
-                    <!-- Check the user_id and display the message accordingly -->
-                    @if($message->user_id == auth()->id()) <!-- TODO: this is null -->
-                        <p id="user-message-{{ $message->id }}" class="user-message">{{ $message->text }}</p>
-                    @else
-                        <p id="contact-message-{{ $message->id }}" class="contact-message">{{ $message->text }}</p>
-                    @endif
-                </div>
-            @endforeach
+            @if($chosenContactId)
+                @foreach ($messages as $message)
+                    <div class="message-wrapper">
+                        @if($message->user_id == auth()->id())
+                            <p id="user-message-{{ $message->id }}" class="user-message">{{ $message->text }}</p>
+                        @else
+                            <p id="contact-message-{{ $message->id }}" class="contact-message">{{ $message->text }}</p>
+                        @endif
+                    </div>
+                @endforeach
+            @else
+                <p>Please select a contact to view messages.</p>
+            @endif        
         </section>
     </div>
 </body>
