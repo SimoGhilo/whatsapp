@@ -68,9 +68,7 @@ class User extends Authenticatable
     }
 
     public function chosenContact($contactId){
-        return $this->hasOne(User::class)->where(function ($query) use ($contactId){
-            $query->where('contact_id', $contactId);
-        });
+        return $this->contacts()->where('contact_id', $contactId)->first();
     }
     
 }

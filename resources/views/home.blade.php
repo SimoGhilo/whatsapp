@@ -24,7 +24,7 @@
         <section class="chatbox">
             <div class="title">
                 <!-- TODO: below display chosen contact_id -->
-                <h1>{{auth()->user()->chosenContact()}}</h1>
+                <h1>{{auth()->user()->chosenContact($chosenContactId)}}</h1>
             </div>
             @if($chosenContactId)
                 @foreach ($messages as $message)
