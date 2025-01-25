@@ -21,24 +21,30 @@
                 </form>
             @endforeach        
         </section>
-        <section class="chatbox">
+        <div class="chatbox">
             <div class="title">
                 <h1>{{ auth()->user()->chosenContact($chosenContactId)?->name ?? 'No user found' }}</h1>
             </div>
-            @if($chosenContactId)
-                @foreach ($messages as $message)
-                    <div class="message-wrapper">
-                        @if($message->user_id == auth()->id())
-                            <p id="user-message-{{ $message->id }}" class="user-message">{{ $message->text }}</p>
-                        @else
-                            <p id="contact-message-{{ $message->id }}" class="contact-message">{{ $message->text }}</p>
-                        @endif
-                    </div>
-                @endforeach
-            @else
-                <p>Please select a contact to view messages.</p>
-            @endif        
-        </section>
+
+            <div class="messages-container">
+                @if($chosenContactId)
+                    @foreach ($messages as $message)
+                        <div class="message-wrapper">
+                            @if($message->user_id == auth()->id())
+                                <p id="user-message-{{ $message->id }}" class="user-message">{{ $message->text }}</p>
+                            @else
+                                <p id="contact-message-{{ $message->id }}" class="contact-message">{{ $message->text }}</p>
+                            @endif
+                        </div>
+                    @endforeach
+                @else
+                    <p>Please select a contact to view messages.</p>
+                @endif  
+            </div>
+            <div class="new-text">
+                <textarea placeholder="Enter your message here"></textarea>
+            </div>    
+        </div> 
     </div>
 </body>
 </html>
@@ -58,7 +64,9 @@
     .title{
         border: 1px solid violet;
         width: 100%;
-        text-align: center
+        text-align: center;
+        margin-bottom: 0.5rem;
+        /* position: sticky; */
     }
 
     .chatbox{
@@ -68,10 +76,11 @@
         justify-content: flex-start;
         width: 70%;
         border: 1px solid red;
+        height: 100vh;
     }
 
-    .chatbox > div{
-        margin-bottom: 5rem;
+    .chatbox > .message-wrapper{
+        margin-bottom: 3rem;
     }
 
     .contact-list{
@@ -87,22 +96,57 @@
         margin-bottom: 1rem;
     }
 
-    .message-wrapper{
-        border: 1px solid orange;
+    .messages-container{
+        display: flex;
+        flex-direction: column;
+        overflow-y: scroll;
         width: 100%;
+    }
+
+    .message-wrapper {
         display: flex;
     }
 
-    .user-message{
-        align-self: flex-start;
-        text-align: left;
-        color: yellow;
+    .user-message {
+        background-color: #99f5a5; /* Light green for user message */
+        padding: 10px;
+        border-radius: 10px;
+        color: black;
+        margin-left:6rem;
     }
 
-    .contact-message{
-        align-self: flex-end;
-        text-align: right;
-        color: aqua;
+    .contact-message {
+        background-color: #79e1f3; /* Light blue for contact message */
+        padding: 10px;
+        border-radius: 10px;
+        color: black;
+        margin-left:35rem;
+
+    }
+
+    .new-text{
+        width: 100%;
+        position: relative; 
+    }
+
+    .new-text > textarea {
+        width: 100%;
+        text-align: center;
+    }
+
+    @media screen and (max-width:480px){
+            .user-message {
+            margin-right:3rem;
+        }
+
+        .contact-message {
+            margin-left:3rem;
+
+        }
+
+        .new-text{
+            bottom: -6.75rem;
+        }
     }
 
 
