@@ -41,9 +41,12 @@
                     <p>Please select a contact to view messages.</p>
                 @endif  
             </div>
-            <div class="new-text">
-                <textarea placeholder="Enter your message here"></textarea>
-            </div>    
+            <form class="new-text" method="POST" action="{{ route('postMessage') }}">
+                @csrf
+                <textarea name="textValue" class="form-control rounded-pill p-2" placeholder="Enter your message here"></textarea>
+                <input id="hiddenInput" type="hidden" name="contact_id" value="{{ $chosenContactId }}">
+                <button id="sendMessage" class="btn btn-success rounded-circle"><bold>></bold></button>
+            </form>
         </div> 
     </div>
 </body>
@@ -127,10 +130,25 @@
     .new-text{
         width: 100%;
         position: relative; 
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
 
     .new-text > textarea {
-        width: 100%;
+        margin-left: 2%;
+        width: 75%;
+        text-align: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .new-text > button {
+        height: 50px;
+        width:50px;
+        margin-left: 1%;
+        margin-right: 3%;
         text-align: center;
     }
 
@@ -143,12 +161,11 @@
             margin-left:3rem;
 
         }
-
-        .new-text{
-            bottom: -6.75rem;
-        }
     }
 
 
 </style>
+
+
+
 
