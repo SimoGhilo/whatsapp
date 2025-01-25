@@ -67,8 +67,12 @@ class User extends Authenticatable
             });
     }
 
-    public function chosenContact($contactId){
-        return $this->contacts()->where('contact_id', $contactId)->first();
+    public function chosenContact($contactId)
+    {
+        $contact = $this->contacts()->where('contact_id', $contactId)->first();
+    
+        // Return the user associated with the contact_id
+        return $contact ? $contact->contact : null;
     }
     
 }
