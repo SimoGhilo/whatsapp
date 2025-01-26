@@ -9,8 +9,11 @@
 <body>
     <div class="outer-div">
         <section class="contact-list">
-            <div class="title">
-                <h2>Chats</h2>
+            <div class="title" id="divChats">
+                <h2 class="ChatTitle">Chats</h2>
+                <form method="GET" action="{{ route('newContact')}}">
+                    <button type="submit" class="btn btn-primary">+</button>
+                </form>
             </div>
             @foreach (auth()->user()->contacts as $contact)
                 <form method="GET" action="{{ route('dashboard') }}" style="display: inline;">
@@ -25,7 +28,6 @@
             <div class="title">
                 <h1>{{ auth()->user()->chosenContact($chosenContactId)?->name ?? 'No user found' }}</h1>
             </div>
-
             <div class="messages-container">
                 @if($chosenContactId)
                     @foreach ($messages as $message)
@@ -70,6 +72,16 @@
         text-align: center;
         margin-bottom: 0.5rem;
         /* position: sticky; */
+    }
+
+    #divChats{
+        display: flex;
+        align-items: center;
+        justify-content:center;
+    }
+
+    .ChatTitle{
+        margin-right: 0.2rem;
     }
 
     .chatbox{

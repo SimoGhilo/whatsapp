@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\contactController;
+use App\Http\Controllers\NewContactController;
 use App\Http\Controllers\messageController;
 use App\Http\Controllers\DashboardController;
 /** Auth */
@@ -11,6 +12,7 @@ use App\Http\Controllers\Auth\LogoutController;
 
 
 Route::get('/', [DashboardController::class, 'index'])->name('dashboard')->middleware('auth');
+Route::get('/newContact', [NewContactController::class, 'indexNewController'])->name('newContact')->middleware('auth');
 
 /**Auth */
 Route::get('login', [LoginController::class, 'showLoginForm'])->name('login');
