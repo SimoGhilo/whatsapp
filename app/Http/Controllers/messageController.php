@@ -37,7 +37,6 @@ class messageController extends Controller
             'created_at' => $now->getTimestamp()
         ]);
 
-        /** TODO: form does not work, data is posted correctly to the backend but does not insert into DB, text field is not recognised */
 
         // Redirect back to the previous page to refresh the messages
         return redirect()->back()->with('success', 'Message sent!');

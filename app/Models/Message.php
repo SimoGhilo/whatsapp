@@ -8,7 +8,7 @@ class Message extends Model
 {
     protected $table = 'message';
 
-    protected $fillable = ['user_id', 'contact_id'];
+    protected $fillable = ['user_id', 'contact_id', 'text'];
 
     // The user who sent the messgae
     public function user()
