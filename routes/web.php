@@ -22,3 +22,5 @@ Route::get('logout', [LogoutController::class, 'logout'])->name('logout');
 Route::get('register', [RegisterController::class, 'showRegistrationForm'])->name('register');
 Route::post('register', [RegisterController::class, 'register']);
 Route::post('post-message', [messageController::class, 'postMessage'])->name('postMessage');
+
+/**TODO: styles register and login forms, media queries chats, remove contact, alter profile */
