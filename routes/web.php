@@ -13,6 +13,7 @@ use App\Http\Controllers\Auth\LogoutController;
 
 Route::get('/', [DashboardController::class, 'index'])->name('dashboard')->middleware('auth');
 Route::get('/newContact', [NewContactController::class, 'indexNewController'])->name('newContact')->middleware('auth');
+Route::post('/newContact', [NewContactController::class, 'createContact'])->name('createContact')->middleware('auth');
 
 /**Auth */
 Route::get('login', [LoginController::class, 'showLoginForm'])->name('login');

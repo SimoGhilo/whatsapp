@@ -10,30 +10,36 @@
     <div class="container mt-5">
         <h1 class="mb-4">Add New Contact</h1>
 
-        <!-- Bootstrap Form -->
-        <form action="{{ route('') }}" method="POST" enctype="multipart/form-data">
+        <form method="POST" action="{{ route('createContact')}}" enctype="multipart/form-data">
             @csrf <!-- Laravel's CSRF token for form security -->
 
             <!-- Name Field -->
             <div class="mb-3">
                 <label for="name" class="form-label">Name</label>
-                <input type="text" class="form-control" id="name" name="name" placeholder="Enter contact name" required>
+                <input type="text" class="form-control" id="name" name="name"  value="{{ old('name') }}" placeholder="Enter contact name" required>
             </div>
 
             <!-- Email Field -->
             <div class="mb-3">
                 <label for="email" class="form-label">Email</label>
-                <input type="email" class="form-control" id="email" name="email" placeholder="Enter contact email">
+                <input type="email" class="form-control" id="email" name="email"  value="{{ old('email') }}" placeholder="Enter contact email">
             </div>
 
             <!-- Mobile Field -->
             <div class="mb-3">
                 <label for="mobile" class="form-label">Mobile</label>
-                <input type="tel" class="form-control" id="mobile" name="mobile" placeholder="Enter contact mobile number" required>
+                <input type="tel" class="form-control" id="mobile" name="mobile"  value="{{ old('mobile') }}" placeholder="Enter contact mobile number" required>
             </div>
 
+            @if (session('error'))
+                <div class="alert alert-danger">
+                    {{ session('error') }}
+                </div>
+            @endif
+
             <!-- Submit Button -->
-            <button type="submit" class="btn btn-primary">Add Contact</button>
+            <button type="submit" class="btn btn-success">Add Contact</button>
+            <a href="{{ url()->previous() }}" class="btn btn-secondary">Go Back</a>
         </form>
     </div>
 
